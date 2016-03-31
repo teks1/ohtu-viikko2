@@ -8,10 +8,11 @@ import java.util.List;
 public class Statistics {
 
     private List<Player> players;
+    private Reader reader;
 
-    public Statistics() {
-        PlayerReader reader = new PlayerReader("http://nhlstatistics.herokuapp.com/players.txt");
-        players = reader.getPlayers();       
+    public Statistics(Reader reader) {
+        this.reader = reader;
+        players = reader.getPlayers();
     }
 
     public Player search(String name) {
@@ -26,26 +27,29 @@ public class Statistics {
 
     public List<Player> team(String teamName) {
         ArrayList<Player> playersOfTeam = new ArrayList<Player>();
-        
+
         for (Player player : players) {
-            if ( player.getTeam().equals(teamName)) {
+            if (player.getTeam().equals(teamName)) {
                 playersOfTeam.add(player);
             }
         }
-        
+
         return playersOfTeam;
     }
 
     public List<Player> topScorers(int howMany) {
+        if (howMany >= players.size()){
+            howMany = players.size() - 1;
+        }
         Collections.sort(players);
         ArrayList<Player> topScorers = new ArrayList<Player>();
         Iterator<Player> playerIterator = players.iterator();
-        
-        while (howMany>=0) {
-            topScorers.add( playerIterator.next() );            
+
+        while (howMany >= 0) {
+            topScorers.add(playerIterator.next());
             howMany--;
         }
-        
+
         return topScorers;
     }
 

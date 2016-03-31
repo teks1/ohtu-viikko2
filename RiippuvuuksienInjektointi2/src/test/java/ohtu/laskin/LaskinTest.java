@@ -1,11 +1,10 @@
 package ohtu.laskin;
 
 import java.util.ArrayList;
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 import org.junit.Test;
 
-public class LaskinTest {
-}
+
 
 class IOStub implements IO {
 
@@ -26,11 +25,13 @@ class IOStub implements IO {
         outputs.add(m);
     }
 }
+public class LaskinTest {
 
-//    @Test
-//    public void yksiSummaOikein() {
-//        IOStub io = new IOStub(1, 3, -9999);
-//        new Laskin(io).suorita();
-//        
-//        assertEquals("summa: 4\n",io.outputs.get(2));
-//    }
+    @Test
+    public void yksiSummaOikein() {
+        IOStub io = new IOStub(1, 3, -9999);
+        new Laskin(io).suorita();
+        
+        assertEquals("summa: 4\n",io.outputs.get(2));
+    }
+}
